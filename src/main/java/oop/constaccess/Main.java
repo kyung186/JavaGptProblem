@@ -1,4 +1,4 @@
-package oop.constAccess;
+package oop.constaccess;
 
 // 메인 클래스
 public class Main {

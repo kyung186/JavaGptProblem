@@ -1,4 +1,4 @@
-package oop.constAccess;
+package oop.constaccess;
 
 // 은행 계좌 객체
 public class BankAccount {
