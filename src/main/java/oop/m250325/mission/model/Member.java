@@ -1,4 +1,4 @@
-package oop.m250322.mission;
+package oop.m250325.mission.model;
 
 public class Member {
 
