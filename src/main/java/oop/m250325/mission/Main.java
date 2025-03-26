@@ -24,25 +24,10 @@ public class Main {
         bookList.add(new Book("Php", "Rarabel", "Science"));
         bookList.add(new Book("JavaScript", "React", "Romance"));
 
-        // RecommendManager 객체 선언
-//        RecommendManager manager = new RecommendManager();
         RentalManager rentalManager = new RentalManager();
 
-        // 테스트 - 도서 추천 출력1
-//        manager.recommendBook(member1, bookList);
-        // String memberId, Book book, LocalDate rentalDate, int rentalPeriod
         rentalManager.rentBook(member1.getId(), bookList.get(0), LocalDate.now(), 5);
 
-        // String memberId, String bookTitle
-//        rentalManager.returnBook(member1.getId(), bookList.get(0).getTitle());
-
         rentalManager.checkOverdue(member1.getId());
-        // 테스트 - 도서 추천 출력2
-//        manager.recommendBook(member2, bookList);
-//        manager.getBookList(member2.getId(), member2.getPreferGenre());
-
-        // 특정 장르 도서 조회
-//        manager.getSpecBook("Science", bookList);
-
     }
 }
