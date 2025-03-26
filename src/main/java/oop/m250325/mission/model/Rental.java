@@ -11,7 +11,7 @@ public class Rental {
     public Rental(Book book, LocalDate rentalDate, LocalDate returnDueDate) {
         this.book = book;
         this.rentalDate = rentalDate;
-        this.returnDueDate = this.returnDueDate;
+        this.returnDueDate = returnDueDate;
     }
 
     public Book getBook() {

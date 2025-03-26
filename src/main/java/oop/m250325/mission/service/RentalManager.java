@@ -4,6 +4,7 @@ import oop.m250325.mission.model.Book;
 import oop.m250325.mission.model.Rental;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class RentalManager {
@@ -20,7 +21,8 @@ public class RentalManager {
         if (rentalMap.containsKey(memberId)) {
             rentalList = rentalMap.get(memberId);
         }
-        rentalList.add(new Rental(book, rentalDate, rentalDate.plusDays(rentalPeriod)));
+        LocalDate returnDueDate = rentalDate.plusDays(rentalPeriod);
+        rentalList.add(new Rental(book, rentalDate, returnDueDate));
         rentalMap.put(memberId, rentalList);
     }
 
@@ -41,6 +43,23 @@ public class RentalManager {
       연체 도서: [Title1] (연체일: 2일, 연체료: 1000원)
     * */
     public void checkOverdue(String memberId) {
+        rentalList = rentalMap.get(memberId);
+        StringBuilder sbRental = new StringBuilder();
+        StringBuilder sbOverdue = new StringBuilder();
+        long overdueDays = 0;
 
+        for (Rental rental : rentalList) {
+            sbRental.append("[").append(rental.getBook().getTitle()).append("] (")
+                    .append(rental.getReturnDueDate()).append(") ");
+            overdueDays = ChronoUnit.DAYS.between(LocalDate.now(), rental.getReturnDueDate());
+            if (rental.getRentalDate().isBefore(LocalDate.now())) {
+                sbOverdue.append(rental.getBook().getTitle()).append(" (연체일: ")
+                        .append(ChronoUnit.DAYS.between(LocalDate.now(), rental.getReturnDueDate()))
+                        .append("일, 연체료: ").append(overdueDays * 500).append(")");
+            }
+        }
+
+        System.out.println("회원ID : " + memberId + " -> 대여 도서: " + sbRental);
+        System.out.println("연체 도서: " + sbOverdue);
     }
 }
