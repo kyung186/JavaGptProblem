@@ -26,7 +26,8 @@ public class Main {
 
         RentalManager rentalManager = new RentalManager();
 
-        rentalManager.rentBook(member1.getId(), bookList.get(0), LocalDate.now(), 5);
+        LocalDate testDate = LocalDate.of(2025, 3, 1);
+        rentalManager.rentBook(member1.getId(), bookList.get(0), testDate, 5);
 
         rentalManager.checkOverdue(member1.getId());
     }

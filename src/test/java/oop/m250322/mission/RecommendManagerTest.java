@@ -15,7 +15,5 @@ class RecommendManagerTest {
 
     @Test
     public void testGetBookList() {
-
-
     }
 }

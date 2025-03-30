@@ -21,6 +21,8 @@ public class RentalManager {
         if (rentalMap.containsKey(memberId)) {
             rentalList = rentalMap.get(memberId);
         }
+
+        // 반납일 : 대여일 + 대여 기간
         LocalDate returnDueDate = rentalDate.plusDays(rentalPeriod);
         rentalList.add(new Rental(book, rentalDate, returnDueDate));
         rentalMap.put(memberId, rentalList);
@@ -46,20 +48,22 @@ public class RentalManager {
         rentalList = rentalMap.get(memberId);
         StringBuilder sbRental = new StringBuilder();
         StringBuilder sbOverdue = new StringBuilder();
-        long overdueDays = 0;
+        long overdueDays;
 
         for (Rental rental : rentalList) {
             sbRental.append("[").append(rental.getBook().getTitle()).append("] (")
                     .append(rental.getReturnDueDate()).append(") ");
-            overdueDays = ChronoUnit.DAYS.between(LocalDate.now(), rental.getReturnDueDate());
+            overdueDays = ChronoUnit.DAYS.between(rental.getReturnDueDate(), LocalDate.now());
             if (rental.getRentalDate().isBefore(LocalDate.now())) {
                 sbOverdue.append(rental.getBook().getTitle()).append(" (연체일: ")
-                        .append(ChronoUnit.DAYS.between(LocalDate.now(), rental.getReturnDueDate()))
+                        .append(ChronoUnit.DAYS.between(rental.getReturnDueDate(), LocalDate.now()))
                         .append("일, 연체료: ").append(overdueDays * 500).append(")");
             }
         }
 
         System.out.println("회원ID : " + memberId + " -> 대여 도서: " + sbRental);
-        System.out.println("연체 도서: " + sbOverdue);
+        if (!sbOverdue.isEmpty()) {
+            System.out.println("연체 도서: " + sbOverdue);
+        }
     }
 }
