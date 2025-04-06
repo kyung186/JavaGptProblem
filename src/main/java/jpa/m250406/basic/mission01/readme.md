@@ -22,10 +22,10 @@
 
 - 테이블 이름: `users`
 - 필드:
-    - `id` (Long, PK, auto)
-    - `username` (String, not null)
-    - `age` (int)
-    - `email` (String, unique)
+  - `id` (Long, PK, auto)
+  - `username` (String, not null)
+  - `age` (int)
+  - `email` (String, unique)
 - 기본 생성자 필수
 - getter/setter 작성
 
