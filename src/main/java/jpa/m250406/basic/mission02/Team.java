@@ -2,6 +2,9 @@ package jpa.m250406.basic.mission02;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "team")
 public class Team {
@@ -12,6 +15,14 @@ public class Team {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    @OneToMany(mappedBy = "team")
+    private List<Member> members = new ArrayList<>();
+
+    public void addMember(Member member) {
+        members.add(member);
+        member.setTeam(this);
+    }
 
     public Team(String name) {
         this.name = name;
@@ -26,6 +37,10 @@ public class Team {
 
     public String getName() {
         return name;
+    }
+
+    public List<Member> getMembers() {
+        return members;
     }
 
     @Override
