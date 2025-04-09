@@ -1,11 +1,11 @@
-package jpa.m250406.basic.mission02;
+package jpa.m250406.basic.mission03;
 
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "mission02_Team")
+@Entity(name = "mission03_Team")
 @Table(name = "team")
 public class Team {
 

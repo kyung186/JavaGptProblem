@@ -1,8 +1,8 @@
-package jpa.m250406.basic.mission02;
+package jpa.m250406.basic.mission03;
 
 import jakarta.persistence.*;
 
-@Entity(name = "mission02_Member")
+@Entity(name = "mission03_Member")
 @Table(name = "member")
 public class Member {
 
