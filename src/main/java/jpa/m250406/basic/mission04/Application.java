@@ -50,6 +50,9 @@ public class Application {
                 }
             }
 
+            /* 🟡 문제 4. QueryDSL로 조건 검색 */
+
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
