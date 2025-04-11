@@ -19,10 +19,10 @@ public class Post {
     @Column
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Users user;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     public Post() {};
@@ -40,6 +40,10 @@ public class Post {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public long getId() {
