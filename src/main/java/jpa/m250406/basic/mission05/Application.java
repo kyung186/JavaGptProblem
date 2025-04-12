@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import jpa.m250406.basic.mission05.model.Post;
+import jpa.m250406.basic.mission05.model.Users;
 
 public class Application {
     public static void main(String[] args) {
@@ -46,11 +48,24 @@ public class Application {
 //            em.flush();
 
             /* 🟡 문제 5. 벌크 연산 */
-            Users users = em.find(Users.class, 1L);
-            Post post = new Post("제목제목", "내용내용", users);
+            Users user = em.find(Users.class, 1L);
+            Post post1 = new Post("제목제목", "내용내용", user);
+            Post post2 = new Post("제목이다", "내용이다", user);
+            em.persist(post1);
+            em.persist(post2);
 
-            em.createQuery("UPDATE Post p SET p.title = '제목 없음'", Post.class);
+            int updatedCount = em.createQuery("UPDATE Post p SET p.content = '내용 없음'").executeUpdate();
+            System.out.println("업데이트된 행 수 : " + updatedCount);
 
+            System.out.println("post1: " + post1.getContent());
+            System.out.println("post2: " + post2.getContent());
+
+            em.clear();
+
+            Post reloadedPost1 = em.find(Post.class, post1.getId());
+            Post reloadedPost2 = em.find(Post.class, post2.getId());
+            System.out.println("reloadedPost1: " + reloadedPost1.getContent());
+            System.out.println("reloadedPost2: " + reloadedPost2.getContent());
 
             tx.commit();
 //            em.clear();

@@ -1,4 +1,4 @@
-package jpa.m250406.basic.mission05;
+package jpa.m250406.basic.mission05.model;
 
 import jakarta.persistence.*;
 

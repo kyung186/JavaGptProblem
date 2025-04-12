@@ -14,10 +14,10 @@
         <class>jpa.m250406.basic.mission04.Team</class>
         <class>jpa.m250406.basic.mission04.Member</class>
 
-        <class>jpa.m250406.basic.mission05.Comment</class>
-        <class>jpa.m250406.basic.mission05.Post</class>
-        <class>jpa.m250406.basic.mission05.Tag</class>
-        <class>jpa.m250406.basic.mission05.Users</class>
+        <class>jpa.m250406.basic.mission05.model.Comment</class>
+        <class>jpa.m250406.basic.mission05.model.Post</class>
+        <class>jpa.m250406.basic.mission05.model.Tag</class>
+        <class>jpa.m250406.basic.mission05.model.Users</class>
 
         <properties>
             <!-- 데이터 베이스 연결 정보 -->
