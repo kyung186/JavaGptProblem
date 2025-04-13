@@ -24,6 +24,7 @@ dependencies {
 //    implementation 'org.springframework:spring-context:5.3.30'
     implementation 'org.springframework.boot:spring-boot-starter' // 핵심 기능
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // 테스트용
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
 
 //    implementation 'com.querydsl:querydsl-core:5.0.0'
