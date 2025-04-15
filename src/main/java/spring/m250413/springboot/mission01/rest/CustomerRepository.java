@@ -1,4 +1,4 @@
-package spring.m250413.springboot.mission;
+package spring.m250413.springboot.mission01.rest;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +14,10 @@ public class CustomerRepository {
     private Long sequence = 0L;
 
     public Customer save(Customer customer) {
+        System.out.println(customer);
         customer.setId(++sequence);
         store.put(customer.getId(), customer);
+        System.out.println(store.toString());
         return customer;
     }
 

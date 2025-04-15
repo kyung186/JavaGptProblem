@@ -24,7 +24,7 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="root"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa_mission"/>
+            <property name="javax.persistence.jdbc.url" value=""/>
             <!-- hibernate 설정 (실행 되는 sql의 생성) -->
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <!-- hibernate 설정 (실행 되는 sql 구문을 format 형태로 보여준다) -->

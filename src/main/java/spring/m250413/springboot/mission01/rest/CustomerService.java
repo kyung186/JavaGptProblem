@@ -1,4 +1,4 @@
-package spring.m250413.springboot.mission;
+package spring.m250413.springboot.mission01.rest;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,7 @@ public class CustomerService {
     }
 
     public Customer register(Customer customer) {
+        System.out.println("👉 서비스 진입: " + customer.getName());
         return customerRepository.save(customer);
     }
 

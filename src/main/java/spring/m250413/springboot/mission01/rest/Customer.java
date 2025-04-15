@@ -1,4 +1,4 @@
-package spring.m250413.springboot.mission;
+package spring.m250413.springboot.mission01.rest;
 
 import java.time.LocalDate;
 
@@ -8,6 +8,9 @@ public class Customer {
     private String name;
     private String email;
     private LocalDate createdAt;
+
+    public Customer() {
+    }
 
     public Customer(String name, String email) {
         this.name = name;
