@@ -1,13 +1,10 @@
-package spring.m250413.springboot.mission02.rest;
+package spring.m250413.springboot.mission02.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import spring.m250413.springboot.mission02.domain.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    boolean existsByEmail(String email);
 
 //    private final Map<Long, Customer> store = new HashMap<>();
 //    private Long sequence = 0L;

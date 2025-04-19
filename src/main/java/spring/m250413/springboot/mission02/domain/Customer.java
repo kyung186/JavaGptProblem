@@ -1,4 +1,4 @@
-package spring.m250413.springboot.mission02.rest;
+package spring.m250413.springboot.mission02.domain;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,9 +1,9 @@
-package spring.m250413.springboot.mission02.rest;
+package spring.m250413.springboot.mission02.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import spring.m250413.springboot.mission01.rest.CustomerRepository;
+import spring.m250413.springboot.mission02.domain.Customer;
+import spring.m250413.springboot.mission02.service.CustomerService;
 
 import java.util.List;
 import java.util.Map;
@@ -24,19 +24,11 @@ public class CustomerController {
         return customerService.register(customer);
     }
 
-   @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable("id") Long id) {
         System.out.println("✅ 컨트롤러 진입"); // 가장 첫 줄
-        try {
-            Customer customer = customerService.getCustomer(id);
-            if (customer == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-            return ResponseEntity.ok(customer);
-        } catch (Exception e) {
-            System.out.println("❌ 예외 발생: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        Customer customer = customerService.getCustomer(id);
+        return ResponseEntity.ok(customer);
     }
 
 //    @GetMapping("/{id}")
@@ -64,4 +56,21 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         System.out.println("삭제가 완료되었습니다.");
     }
+
+//    @GetMapping("/email-check")
+//    public boolean emailCheck(@RequestParam("email") String email) {
+//        if (customerService.existsEmail(email)) {
+//            throw new IllegalArgumentException("이메일이 중복되었습니다.");
+//        }
+//        System.out.println("사용 가능한 이메일입니다.");
+//        return true;
+//    }
+
+//    @GetMapping("/email-check")
+//    public ResponseEntity<String> emailCheck(@RequestParam("email") String email) {
+//        if (customerService.existsEmail(email)) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body("이메일이 중복되었습니다.");
+//        }
+//        return ResponseEntity.ok("사용 가능한 이메일입니다.");
+//    }
 }
