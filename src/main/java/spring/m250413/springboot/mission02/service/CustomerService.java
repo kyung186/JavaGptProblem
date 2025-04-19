@@ -1,7 +1,11 @@
 package spring.m250413.springboot.mission02.service;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import spring.m250413.springboot.mission02.domain.dto.CustomerRequest;
+import spring.m250413.springboot.mission02.domain.dto.CustomerResponse;
+import spring.m250413.springboot.mission02.domain.mapper.CustomerMapper;
 import spring.m250413.springboot.mission02.exception.CustomerNotFoundException;
 import spring.m250413.springboot.mission02.exception.DuplicateEmailException;
 import spring.m250413.springboot.mission02.domain.Customer;
@@ -15,21 +19,28 @@ import java.util.Map;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
-    public Customer register(Customer customer) {
-        System.out.println("👉 서비스 진입: " + customer.getName());
+    public CustomerResponse register(CustomerRequest request) {
+        System.out.println("👉 서비스 진입: " + request.getName());
+        Customer customer = customerMapper.toEntity(request);
         if (customerRepository.existsByEmail(customer.getEmail())) {
             throw new DuplicateEmailException(customer.getEmail());
         }
-        return customerRepository.save(customer);
+
+        Customer saved = customerRepository.save(customer);
+        return customerMapper.toDto(saved);
     }
 
-    public Customer getCustomer(Long id) {
-        return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
+    public CustomerResponse getCustomer(Long id) {
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
+
+        return customerMapper.toDto(customer);
     }
 
     public List<Customer> getAllCustomers() {

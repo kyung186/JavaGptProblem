@@ -1,8 +1,12 @@
 package spring.m250413.springboot.mission02.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.m250413.springboot.mission02.domain.Customer;
+import spring.m250413.springboot.mission02.domain.dto.CustomerRequest;
+import spring.m250413.springboot.mission02.domain.dto.CustomerResponse;
 import spring.m250413.springboot.mission02.service.CustomerService;
 
 import java.util.List;
@@ -19,16 +23,17 @@ public class CustomerController {
     }
 
     @PostMapping
-    public Customer register(@RequestBody Customer customer) {
-        System.out.println("💡 요청 도착: " + customer);
-        return customerService.register(customer);
+    public ResponseEntity<CustomerResponse> register(@RequestBody @Valid CustomerRequest request) {
+        System.out.println("💡 요청 도착: " + request);
+        CustomerResponse response = customerService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable("id") Long id) {
+    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable("id") Long id) {
         System.out.println("✅ 컨트롤러 진입"); // 가장 첫 줄
-        Customer customer = customerService.getCustomer(id);
-        return ResponseEntity.ok(customer);
+        CustomerResponse response = customerService.getCustomer(id);
+        return ResponseEntity.ok(response);
     }
 
 //    @GetMapping("/{id}")
