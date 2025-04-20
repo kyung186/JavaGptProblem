@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>고객 등록</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 2em; }
+        label { display: block; margin-top: 1em; }
+        input { padding: 0.5em; width: 300px; }
+        .error { color: red; margin-top: 1em; }
+        .success { color: green; margin-top: 1em; }
+    </style>
+</head>
+<body>
+<h1>고객 등록</h1>
+
+<form id="customerForm">
+    <label>
+        이름:
+        <input type="text" id="name" required />
+    </label>
+    <label>
+        이메일:
+        <input type="email" id="email" required />
+    </label>
+    <button type="submit">등록</button>
+</form>
+
+<div class="error" id="errorBox"></div>
+<div class="success" id="successBox"></div>
+
+<script>
+    document.getElementById("customerForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // 초기화
+        document.getElementById("errorBox").innerText = "";
+        document.getElementById("successBox").innerText = "";
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+
+        fetch("/customers", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, email })
+        })
+            .then(async res => {
+                const result = await res.json();
+                if (!res.ok) {
+                    throw result;
+                }
+                document.getElementById("successBox").innerText = "✅ 등록 성공: ID " + result.id;
+            })
+            .catch(err => {
+                if (err.message) {
+                    document.getElementById("errorBox").innerText = "❌ " + err.message;
+                } else {
+                    document.getElementById("errorBox").innerText = "❌ 서버 오류가 발생했습니다.";
+                }
+            });
+    });
+</script>
+</body>
+</html>
